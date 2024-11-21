@@ -1,0 +1,9 @@
+Using mpiP
+Using mpiP is very simple. Because it gathers MPI information through the MPI profiling layer, mpiP is a link time library. That is, you don't have to recompile your application to use mpiP. Note that you might have to recompile to include the '-g' option. This is important if you want mpiP to decode the PC to a source code filename and line number automatically. mpiP will work without -g, but mileage may vary.
+
+Instrumentation
+Link Time Instrumentation
+Link the mpiP library with an executable. The dependent libraries may need to be specified as well. If the link command includes the MPI library, order the mpiP library before the MPI library, as in . -lmpiP -lmpi
+
+Run Time Instrumentation
+An uninstrumented executable may able to be instrumented at run time by setting the LD_PRELOAD environment variable, as in . Preloading libmpiP can possibly interfere with the launcher and may need to be specified on the launch command, such as .export LD_PRELOAD=[path to mpiP]/libmpiP.sosrun -n 2 --export=LD_PRELOAD=[path to mpiP]/libmpiP.so [executable]
